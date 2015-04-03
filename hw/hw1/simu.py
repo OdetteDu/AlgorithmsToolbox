@@ -35,10 +35,10 @@ def throw_half_determ (bin):
 	else:
 		bin[s1] = bin[s1] + 1
 
-def simulate (hash_func):
+def simulate (strategy_func):
 	bin = [0] * N
 	for i in r:
-		hash_func (bin)
+		strategy_func (bin)
 	return max (bin)
 
 if __name__ == "__main__":
