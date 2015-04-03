@@ -1,5 +1,7 @@
 import random
 import numpy
+import sys
+
 from matplotlib import pyplot
 
 N = 100000
@@ -41,30 +43,53 @@ def simulate (strategy_func):
 		strategy_func (bin)
 	return max (bin)
 
+def simulate_strategy_1 ():
+	print "start simulating strategy 1..."
+	result = [0] * 30
+	for i in range (0, 30):
+		result[i] = simulate (throw_one_rand)
+	print "result = " + str(result)
+	return result
+
+def simulate_strategy_2 ():
+	print "start simulating strategy 2..."
+	result = [0] * 30
+	for i in range (0, 30):
+		result[i] = simulate (throw_two_rand)
+	print "result = " + str(result)
+	return result
+
+def simulate_strategy_3 ():
+	print "start simulating strategy 3..."
+	result = [0] * 30
+	for i in range (0, 30):
+		result[i] = simulate (throw_three_rand)
+	print "result = " + str(result)
+	return result
+
+def simulate_strategy_4 ():
+	print "start simulating strategy 4..."
+	result = [0] * 30
+	for i in range (0, 30):
+		result[i] = simulate (throw_half_determ)
+	print "result = " + str(result)
+	return result
+
 if __name__ == "__main__":
 	
 	# simulation:
 
-	# one_rand = []
-	# two_rand = []
-	# three_rand = []
-	# half_determ = [] 
-	# for i in range (0, 30):
-	# 	one_rand.append (simulate (throw_one_rand))
-	# 	two_rand.append (simulate (throw_two_rand))
-	# 	three_rand.append (simulate (throw_three_rand))
-	# 	half_determ.append (simulate (throw_half_determ))
-	# print one_rand
-	# print two_rand
-	# print three_rand
-	# print half_determ
+	one_rand = simulate_strategy_1 ()
+	two_rand = simulate_strategy_2 ()
+	three_rand = simulate_strategy_3 ()
+	half_determ = simulate_strategy_4 ()
 
 	# results:
 
-	one_rand = [8, 8, 8, 8, 7, 7, 8, 7, 8, 7, 8, 9, 7, 7, 7, 7, 7, 8, 8, 7, 7, 7, 7, 8, 7, 8, 8, 8, 7, 8]
-	two_rand = [3, 4, 3, 3, 4, 3, 4, 3, 3, 3, 3, 4, 4, 3, 3, 3, 4, 3, 3, 3, 3, 3, 4, 3, 3, 4, 3, 3, 4, 3]
-	three_rand = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
-	half_determ = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+	# one_rand = [8, 8, 8, 8, 7, 7, 8, 7, 8, 7, 8, 9, 7, 7, 7, 7, 7, 8, 8, 7, 7, 7, 7, 8, 7, 8, 8, 8, 7, 8]
+	# two_rand = [3, 4, 3, 3, 4, 3, 4, 3, 3, 3, 3, 4, 4, 3, 3, 3, 4, 3, 3, 3, 3, 3, 4, 3, 3, 4, 3, 3, 4, 3]
+	# three_rand = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+	# half_determ = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 
 	# ploting:
 
