@@ -22,6 +22,9 @@ that all of this is my own work.
 \begin{enumerate}[label=(\alph*)]
  	\item (See code \textbf{simu.py})
  	\item (See \textbf{Figure~\ref{fig:plot}})
+
+Among the four strategies, strategy (a) is simplest in choosing a bin to insert (shortest insertion time), but has the largest number (9 according to the simulation) of balls in the most populated bin. Strategy (b) and (c) lowers the number of balls in the most populated bin to 4, 3 in the simulation, but requires choosing and comparing multiple bins, thus longer insertion time. Strategy (d) has the lowest number of balls in the most populated bin 3, which is the same to Strategy (c), but requires only choosing and comparing 2 bins. Therefore, strategy (d) is the \textbf{sweet spot}, which has a low occupancy of the most populated bin (thus low retrieval time) and reasonable number of bins chosen and compared during insertion (thus low insertion time). Strategy (d) yields the best result if we express the performance as (\# of balls in the most populated bin) * (\# of bins chosen and compared).
+
 	\item 
 
 The strategies of placing balls into bins are analogous to the implementation of hashing with chaining in that:
@@ -35,15 +38,12 @@ Therefore, strategy (a) suggests implementing chaining hashing with one hash fun
 
 Strategy (d) suggests having two sets of buckets $B_1$, $B_2$, and use hash functions $H_1:O\rightarrow{}B_1$, $H_2:O\rightarrow{}B_2$ to choose one bucket from each sets. The object is put into the one with fewer objects (shorter linked list) and ties are broken by choosing the one from $B_1$.
 
-% The trade-offs exist since a more complex insertion algorithms (using more hash functions and choosing a bucket wisely to lower collision thus the length of each bucket) will increase the insertion time, but lower the number of items in a hash bucket thus decreasing the worst-case search time, and vise versa.
+The trade-offs exist since a more complex insertion algorithms (using more hash functions and choosing a bucket wisely to lower collision thus the length of each bucket) will increase the insertion time, but lower the number of items in a hash bucket thus may decreasing the search time.
 
-% Strategy (a) is the most common one used. It is most possible for strategy (a) among all that there will be a collision so that a hash table bucket will contain a large amount of objects and longer time to access an object which requires a linear search on the whole chain of the bucket. Strategy (b) and (c) increases the complexity of the insertion algorithm (more hash function calculations and bucket length comparisons) and the insertion time, but they will lower the chances of the collision and thus less time is consumed to access an object.
+In terms of insertion, Strategy (a) requires only one hash calculation, so as to have the fastest inseration time. Both Strategy (b) and (d) require two hash calculation, and a comparison of the buckets' occupancy. Thus, they have longer insertion time than the strategy (a). Strategy (c) requires three hash calculation and comparations of 3 buckets' occupancy, which makes it the slowest strategy in terms of insertion.
 
-The first strategy is the most common one we used. It is very possible that there will be a collision so that a bucket will contain a large amount of objects so that the time to access an objects requires a linear search on the whole chaining in the bucket.
+In terms of retrieval, according to the result in part (b), the most populated buckets contain 9 objects for strategy (a), 4 objects for strategy (b), 3 objects for stratety (c), and 3 objects for strategy (d). Thus, strategy (a) may need to check $\approx{}9$ objects, strategy (b) $\approx{}2*4=8$ objects, strategy (c) $\approx{}3*3=9$ objects, and strategy (d) $\approx{}3*2=6$ objects. Therefore, the fourth strategy turn out to be the best while search time is considered.
 
-The second strategy require one more hash function, so that for each of the new objects, it will cost the program to calculate one more times. But it will cause less collision.
-The third strategy requires three hash functions so that three calculations are needed, but less collisions.
-The fourth strategy either requires double space, or make each hash bucket received double elements. If we use double space, then the collision will decrease, but if we keep the space be the same, and use two hash function separately, then each bucket will have a higher chance to be hashed in.
 \end{enumerate}
 
 \begin{figure}[h]
