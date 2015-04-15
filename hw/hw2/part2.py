@@ -1,6 +1,7 @@
 import csv
 import math
 import numpy as np
+import time
 
 def cal_cos_sim (data,g1,g2,x1,x2):
 	dict1 = data[g1][x1]
@@ -73,9 +74,13 @@ for entry in data_reader:
 		nnb[group_id].append([-1,-1])
 	cur[word_id] = count
 
+start = time.clock()
+
 # reduce
 k = 62000
-d = 50
+d = 100
+
+start = time.clock()
 
 M = np.random.normal(0,1,(d,k))
 for group_id in range(0,20):
@@ -87,6 +92,8 @@ for group_id in range(0,20):
 				sum += M[i,key] * original[key]
 			r[i] = sum
 		reduced[group_id].append(r)
+
+dim_red = time.clock()
 
 # calculate reduced_sim and get nearest neighbor
 for g1 in range(0,20):
@@ -103,16 +110,22 @@ for g1 in range(0,20):
 		for entry in nnb[g1]:
 			if entry[0]==g2:
 				n += 1
-		# print "%d,%d,%d" % (g1,g2,n)
+		print "%d,%d,%d" % (g1,g2,n)
+
+cal_nnb = time.clock()
+
+# print "dim_red: %f" % (dim_red - start)
+# print "cal_nnb: %f" % (cal_nnb - dim_red)
+# print "total: %f" % (cal_nnb - start)
 
 # print "--calculate original and reduced cos--"
 # print "g1,x1,original,reduced"
 # calculate with article 3
-for g1 in range(0,20):
-	for x1 in range(0,len(reduced[g1])):
-		original_cos = cal_cos_sim(data,0,g1,2,x1)
-		reduced_cos = cal_cos_reduced(reduced,nnb,0,g1,2,x1)
-		print "%d,%d,%f,%f" % (g1,x1,original_cos,reduced_cos)
+# for g1 in range(0,20):
+# 	for x1 in range(0,len(reduced[g1])):
+# 		original_cos = cal_cos_sim(data,0,g1,2,x1)
+# 		reduced_cos = cal_cos_reduced(reduced,nnb,0,g1,2,x1)
+# 		print "%d,%d,%f,%f" % (g1,x1,original_cos,reduced_cos)
 
 
 

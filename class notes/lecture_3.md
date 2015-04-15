@@ -1,4 +1,4 @@
-# Lecture 3 - Apr.6
+I# Lecture 3 - Apr.6
 
 ### Simiularity Search
 
